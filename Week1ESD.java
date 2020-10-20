@@ -10,13 +10,13 @@ public class Week1ESD {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        boolean keepRunning = true;
-        while (keepRunning){
-            CreateTriangle();
-            System.out.println("Do you want to keep running. y/n");
-            String response = sc.nextLine();
-            if ("n".equals(response.toLowerCase()))
+        Scanner sc = new Scanner(System.in);    //Declare scanner
+        boolean keepRunning = true; 
+        while (keepRunning){    //Loop if user wants to keep running
+            CreateTriangle();       //Create the triangle by getting user inputs
+            System.out.println("Do you want to keep running. y/n"); //Check if user wants to keep running
+            String response = sc.nextLine();        
+            if ("n".equals(response.toLowerCase())) 
                 keepRunning = false;
         }
     } 
@@ -27,7 +27,15 @@ public class Week1ESD {
             System.out.println("Please enter a side length");
             sides.add(sc.nextInt());
         }        
-        Triangle triangle = new Triangle(sides.get(0), sides.get(1), sides.get(2));
-        System.out.println(triangle.GetType());
+        if (CheckValidity(sides.get(0), sides.get(1), sides.get(2))){
+            Triangle triangle = new Triangle(sides.get(0), sides.get(1), sides.get(2));
+            System.out.println(triangle.GetType());
+        }
+        else{
+            System.out.println("Invalid triangle");
+        }
+    }
+    private static boolean CheckValidity(int side1, int side2, int side3){
+        return !(side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1);
     }
 }
